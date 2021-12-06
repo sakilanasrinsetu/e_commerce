@@ -36,7 +36,10 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return self.id
+        if self.customer.name:
+            return self.customer.name
+        else:
+            return 'Customer order'
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL,
@@ -47,7 +50,15 @@ class OrderItem(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-            return self.id
+        if self.product.name:
+            return self.product.name
+        else:
+            return 'Product Name'
+
+    @property        
+    def get_total(self):
+        total = self.product.price *self.quantity
+        return total
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL,

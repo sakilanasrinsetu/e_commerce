@@ -1,1 +1,1 @@
-# This is a basic e commerce site. In this site use django.
+This is a basic e commerce site. In this site use django.
