@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from .models import *
-from django.http import JsonResponse
+from django.http import JsonResponse, request
 
 # Create your views here.
 
 def store(request):
 	products = Product.objects.all()
+	print('ddddd', request.method)
 	context = {'products':products}
 	return render(request, 'store/store.html', context)
 
